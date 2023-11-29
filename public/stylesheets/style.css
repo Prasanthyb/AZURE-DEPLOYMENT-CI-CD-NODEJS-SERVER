@@ -1,8 +1,38 @@
+/* In your style.css file or within the <style> tag in the head */
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  text-align: center;
+}
+
+h1 {
+  color: #1e90ff; 
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: red;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px 0; /* Increase margin for better spacing */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow to the image */
 }
 
 a {
-  color: #00B7FF;
+  color: #1e90ff; /* Change link color to match the h1 color */
+  text-decoration: none;
 }
+
+a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+
