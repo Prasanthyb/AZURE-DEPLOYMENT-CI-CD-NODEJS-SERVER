@@ -25,7 +25,7 @@ const calculateCarValue = (model, year) => {
   }
 };
 
-router.get('/', async (req, res, next) => {
+router.post('/carvalue', async (req, res, next) => {
   try {
     const { model, year } = req.body;
     console.log({ model, year });
@@ -45,6 +45,61 @@ router.get('/', async (req, res, next) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+const riskRating = async (req, res) => {
+  const { claim_history } = req.body;
+  if (!claim_history) {
+    return res.status(400).json({ error: "Claim history is required in the input." });
+  }
+  const calculatedRiskRating = calculateRiskRating(claim_history);
+  if (calculatedRiskRating === -1) {
+    return res.status(400).json({ error: "There is an error in the input value." });
+  } 
+  
+  try {   
+    res.send({ risk_rating: calculatedRiskRating }); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+function calculateRiskRating(claimHistory) {
+  const keywords = ["collide", "crash", "scratch", "bump", "smash"];
+  const lowerCaseClaimHistory = claimHistory.toLowerCase();
+  let riskRating = 0;
+  keywords.forEach((keyword) => {
+    const occurrences = (lowerCaseClaimHistory.match(new RegExp(keyword, "g")) || []).length;
+    riskRating += occurrences;
+  });
+  if (riskRating === 0) {
+    return -1;
+  }
+  return riskRating;
+}
+
+
+router.post('/riskrating', riskRating);
+
+router.post('/quote', async function(req, res, next) {
+  const { car_value, risk_rating } = req.body;
+
+  // Validation
+  if (!car_value || !risk_rating || isNaN(car_value) || isNaN(risk_rating) || car_value < 1 || risk_rating < 1 || risk_rating > 5) {
+    return res.status(400).json({ error: 'Invalid input. Please provide valid car_value and risk_rating.' });
+  }
+
+  const yearlyPremium = Math.floor(car_value * risk_rating / 100);
+  const monthlyPremium = parseFloat((yearlyPremium / 12).toFixed(1));
+
+  try {
+    res.send({ monthly_premium: monthlyPremium, yearly_premium: yearlyPremium });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
