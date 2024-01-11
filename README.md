@@ -1,13 +1,22 @@
-Mission 3
+#  AZURE DEPLOYMENT CI CD NODEJS SERVER
 
 
-## I have created a WEB APP service named MS003 in the azure portal .
-## Then I have added the yaml file for CI and CD.
-## My azure URL is ms003.azurewebsites.net .
-## Successfully build and deployed.
-## Created test coverage for test file.
-## I am getting all the three APIs
-## https://ms003.azurewebsites.net/users/carvalue
-## https://ms003.azurewebsites.net/users/riskrating
-## https://ms003.azurewebsites.net/users/quote
-## working properly through Postman.
+## Created a WEB APP service named MS003 in the AZURE portal .
+
+## Added the YAML file for CI and CD.
+
+## AZURE URL is ** ms003.azurewebsites.net.**
+
+## Successfully Built and Deployed.
+
+## Created TEST COVERAGE for JEST test file.
+
+## Getting all the three APIs working in AZURE.
+
+## **https://ms003.azurewebsites.net/users/carvalue**
+
+## **https://ms003.azurewebsites.net/users/riskrating**
+
+## **https://ms003.azurewebsites.net/users/quote**
+
+##AZURE endpoints are working properly through Postman.
